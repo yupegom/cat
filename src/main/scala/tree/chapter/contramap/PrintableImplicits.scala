@@ -19,6 +19,9 @@ object PrintableImplicits {
     def format(box: Box[B]) = p.contramap(f).format(box.value)
   }*/
 
-  implicit def boxPrinter[A](implicit p: Printable[A]): Printable[Box[A]] = 
-    p.contramap[Box[A]](_.value)
+  implicit def boxPrinter[A](implicit p: Printable[A]): Printable[Box[A]] = {
+
+    val x: ((Box[A]) => A) => Printable[Box[A]] = p.contramap[Box[A]]
+    x(y => y.value)
+  }
 }

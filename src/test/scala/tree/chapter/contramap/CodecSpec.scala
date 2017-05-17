@@ -17,4 +17,10 @@ class CodecSpec extends FlatSpec with Matchers {
     import tree.chapter.contramap.CodecImplicits.booleanCodec
     decode("y") shouldBe None
   }
+
+  "Codec" should "encode a Box[boolean]" in {
+    import tree.chapter.contramap.CodecImplicits.booleanCodec
+    import tree.chapter.contramap.CodecImplicits.boxCodec
+    encode(Box(true)) shouldBe "yes"
+  }
 }

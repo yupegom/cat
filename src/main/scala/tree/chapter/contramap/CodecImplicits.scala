@@ -11,5 +11,5 @@ object CodecImplicits {
   }
 
   implicit def boxCodec[A](implicit c: Codec[A]): Codec[Box[A]] =
-    c.imap[Box[A]](_.value) 
+    c.imap[Box[A]](Box(_), _.value)
 }
